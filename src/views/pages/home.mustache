@@ -1,0 +1,24 @@
+
+{{>partials/header}}
+
+  {{#showWelcome}}
+    <p>Bem vindo Sr {{user.name}} de {{user.age}} anos</p>
+  {{/showWelcome}}
+  <h2>Produtos</h2>
+  <ul>
+    {{#products}}
+      {{>partials/productsItem}}
+    {{/products}}
+  </ul>
+
+  <h2>Lista qualquer</h2>
+  <ul>
+    {{#listaQualquer}}
+      <li>{{.}}</li>
+    {{/listaQualquer}}
+
+    {{^listaQualquer}} {{! // caso a lista esteja vazia }}
+      Não há elementos na lisa para serem exibidos.
+    {{/listaQualquer}}
+  </ul>
+{{>partials/footer}}

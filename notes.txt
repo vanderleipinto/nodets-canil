@@ -1,0 +1,64 @@
+Passando parâmetros via POST 
+
+No servidor server.ts fazemos as seguintes adições.
+
+Deve ser inserido antes das rotas dessa linha de rotas (server.use(mainRoutes);)
+
+server.use(express.urlencoded({extended: true})); // habilita a captura de dados no corpo da requisição via POST. extended: true habilita aquisição dos dados detalhados.
+
+dentro de index.ts, temos uma nova rota, porem ao invés de router.GET teremos:
+router.post("/idade", (req: Request, res: Response) => {
+  res.render("pages/idade");
+});
+
+também será mudada a forma de captura de dados. ao invés de req.query.anoNascimento, teremos: req.body.anoNascimento
+
+
+MVC - Model view controller
+Separa cada arquivo na sua área depois junta tudo para rodar o sistema.
+Conceito em que a  aplicação é dividida em pelo menos 3 areas distintas. 
+Modelos (regra de negócios) 
+Visualização (parte visual que aparece na tela)
+Controle ( faz o gerenciamento de todas as coisas) - Recebe dados, organiza os dados. Chama o model para fazer o processamento dos dados.
+
+Controller 
+
+Cria-se uma pasta controller e para cada grupo de informações cria-se um arquivo. Ex: um controller para pagina home, outro para parte institucional (sobre...), outro para informações sobre um produto. Para criação o nome não tem regra (camelcase ou home.controller.ts) fica a critério. 
+
+As funções são criadas nesses arquivos e exportadas para o router, sendo usadas no router.get("/nome", userController.nome). 
+
+Model
+
+Responsável por processar as informações de cada coisa (produtos, usuários...).
+
+Dentro de src cria-se uma pasta src/models.
+Cria-se um arquivo model (nome no singular, pascal case --Primeira letra maiúscula--) Product.ts
+dentro desse arquivo teremos funções para trabalhar com o produto, exemplo // função para pegar todos os produtos do BD, função para pegar produto pelo nome.
+
+// Já que não estamos usando banco de dados, vamos simular uma consulta no BD
+// usa-se type para tipar os itens que serão incluidos em data abaixo
+type Product = {
+  title: string,
+  price: number
+};
+
+//data é uma array do tipo Product, declarado acima.
+const data: Product[]= [ 
+  { title: "Produto x", price: 10 },
+  { title: "Produto y", price: 15 },
+  { title: "Produto z", price: 10 },
+];
+
+export const Product = { // objeto com array de funções relacionadas a produtos.
+  getAll: (): Product[]=> { // função que retorna type Product[] todos os produtos.
+    return data;
+  }
+}
+
+
+Utilizando o Model
+Dentro do controller, importa-se o objeto de funções do model;
+
+import { Product } from "../models/Product";
+
+teremos acesso às funções e consultas de produtos de acordo com o desejado.
