@@ -16,7 +16,7 @@ Aulas de NodeJS, Typescript. Projeto simples com express e mustache.
 
 ### Anotações da aula
 
-nodemon, typescript e tsnode já devem estar instaladas globalmente na máquina.
+nodemon, typescript e tsnode já devem estar instaladas globalmente na máquina
 (npm install -g nodemon typescript ts-node) .
 
 1 - Primeiramente iniciar o node no projeto.
